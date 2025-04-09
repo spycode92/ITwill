@@ -59,6 +59,31 @@ public class Ex4 {
 		
 		System.out.println(b); // 0
 		
+		System.out.println("=====================================");
+		
+		byte b1 = 100;
+		// b1과 정수 10을 더한 값을 다시 b1에 저장
+//		b1 = b1 + 10; // byte + int = int + int = int
+		// => Type mismatch: cannot convert from int to byte
+		// => 결과값을 다시 byte 타입으로 변환해야 한다!
+		b1 = (byte)(b1 + 10);
+		System.out.println(b1);
+		
+		// 확장 대입연산자를 사용하여 b1 + 10의 값을 b1에 저장
+		b1 += 10; // b1 = b1 + 10과 동일
+		System.out.println(b1);
+		
+		System.out.println("================================");
+		
+		// char 타입 변수 값을 변화시킬 때 확장 대입연산자를 많이 사용함
+		char ch = 'A';
+//		ch = ch + 3; // 컴파일 에러 발생!
+		
+		// 해결방법
+//		ch = (char)(ch + 3); // 형변환을 수행하거나
+		ch += 3; // ch = ch + 3;
+		System.out.println(ch);
+		
 	}
 
 }
