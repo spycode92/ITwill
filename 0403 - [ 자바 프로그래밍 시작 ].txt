@@ -1,0 +1,20 @@
+[ 자바 프로그래밍 시작 ]
+- 프로그래밍 : 프로그램을 만드는 과정
+- 프로그램 : 컴퓨터가 이해할 수 있는 명령어들의 모음
+- 프로그래밍 언어
+  저급언어 : 기계어
+  고급언어 : 자바, 파이썬, C 등등
+
+JVM & JRE & JDK
+- JVM : Java Virtual Machine
+  => WORA(Write Once Run Anyway)
+- JRE : Java Runtime Envrionment
+- JDK : Java Development Kit
+
+- JDK : OracleJDK, OpenJDK
+
+프로그래밍 언어로 
+
+
+
+
