@@ -1,1 +1,0 @@
-document.write("test4_2.js");
