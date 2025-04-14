@@ -42,14 +42,23 @@ console.log(`이 문장은 if 문 조건식 판별 결과와 상관없이 무조
 let selectedBtn = confirm("종료하시겠습니까?");
 
 // if 문을 사용하여 selectedBtn 값이 true 인지 판별(= selectedBtn 값이 true 와 같은지 판별)
-//if(selectedBtn == true) { // selectedBtn 값이 true 인 조건이 true 일 경우(조건을 두 번 판별)
+//if(selectedBtn == true) {} // selectedBtn == true 인 조건이 true 일 경우(조건을 두 번 판별)
+// 따라서, if문 조건식 부분에 boolean 타입 값을 판별할 경우에는
+// boolean 타입 값만 사용하여 true/false 를 판별하자!
+// 1) boolean 타입 값이 true 인지를 판별하는 방법
+//    => if 문에 boolean 타입 변수만 표기하면 true 일 때 중괄호 블럭이 실행됨 
 if(selectedBtn) { // selectedBtn == true 와 동일한 표현 방법
-	console.log(`프로그램을 종료합니다!`);
+	console.log(`프로그램을 종료합니다!`); // selectedBtn 값이 true 일 때 실행되는 문장
 }
 
-//if(selectedBtn == false) {
+//if(selectedBtn == false) { // selectedBtn == false 인 조건이 true 일 경우
+// 2) boolean 타입 값이 false 인지를 판별하는 방법
+//    => if문에 boolean 타입 변수만 표기하면 true 를 판별하므로
+//       이 과정을 반전(반대로 뒤집기)하기 위해서는 NOT 연산자(!)를 결합하여 사용해야함
+//    => ex) selectedBtn 이 false 일 때 !selectedBtn 수행 시 true 로 변경되므로
+//           if(true) 문장이 되어 블럭문 내의 코드들을 실행하게 된다!
 if(!selectedBtn) {
-	console.log(`취소 버튼 클릭됨!`);
+	console.log(`취소 버튼 클릭됨!`); // selectedBtn 값이 false 일 때 실행되는 문장
 }
 
 
