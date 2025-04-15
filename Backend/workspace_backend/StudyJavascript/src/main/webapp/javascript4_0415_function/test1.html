@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test1.js"></script>
+</head>
+<body>
+	<h1>test1.html</h1>
+	<input type="button" value="printMsg() 함수 호출" onclick="printMsg()">
+	<hr>
+	<script type="text/javascript">
+		// [ 함수 호출 연습 ]
+		// 1. 전달인자도 없고, 리턴값도 없는 함수 호출
+		// => 전달인자가 없으므로 함수 호출 시 함수명 뒤의 소괄호() 내에 
+		//    아무런 데이터(전달인자)도 기술하지 않음
+		document.write(`hello() 호출 시작!<br>`);
+		
+		// hello() 함수 호출
+		// => 주의! 해당 함수가 정의(선언)되지 않았을 경우 호출 시점에 콘솔창에 오류 메세지 출력됨
+		//    (hello is not defined => hello 가 정의되지 않았음)
+		// => 따라서, hello() 함수는 현재 문서 내에 또는 외부 자바스크립트 파일에 정의되어 있어야 함
+		hello(); // hello() 함수가 정의된 위치로 코드의 흐름(제어권)이 이동함
+		// hello() 함수 호출(실행)이 끝나면 원래 위치(현재 호출한 곳)으로 흐름 복귀 후
+		// 해당 코드에 연결된 다른 동작(연산 등)이 있을 경우 해당 동작을 실행하고
+		// 없으면 바로 다음 라인의 다른 코드를 실행함
+		
+		document.write(`hello() 호출 끝!<br>`);
+		document.write(`<hr>`);
+		// -------------------------------------------------
+		// hello2() 함수 호출
+		hello2();
+		document.write(`<hr>`);
+		// -------------------------------------------------
+		// gugudan() 함수 호출
+		gugudan();
+		document.write(`<hr>`);
+		// -------------------------------------------------
+		// sum() 함수 호출
+		sum();
+	</script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

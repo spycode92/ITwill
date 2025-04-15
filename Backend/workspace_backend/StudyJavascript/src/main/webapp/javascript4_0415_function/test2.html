@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test2.js"></script>
+</head>
+<body>
+	<h1>test2.html</h1>
+	<input type="text" id="name">
+	<input type="button" value="이름 확인" onclick="printName()">
+	<hr>
+	<script type="text/javascript">
+		/*
+		2. 전달인자는 없고, 리턴값만 있는 함수
+		[ 리턴값이 있는 함수 ]
+		- 함수 실행 후 원래 위치로 돌아갈 때 어떤 값(데이터)를 호출한 곳으로 전달하는 형태
+		- 함수 선언 시 자바의 메서드와 달리 별도의 리턴타입은 명시하지 않고
+		  함수 내부에서 return 문을 사용하여 리턴할 데이터를 명시
+		  => return 문에 지정된 데이터의 타입에 따라 리턴되는 데이터 타입이 자동으로 결정됨
+		- 함수를 호출한 곳에서는 함수로부터 리턴되는 데이터를 전달받아 사용 가능
+		  => 변수에 저장하거나 출력문 등의 함수 또는 연산에 즉시 사용도 가능함
+		- 리턴값은 동시에 하나의 값만 지정할 수 있음
+		- 주의! 리턴값이 없는 메서드를 변수에 할당하거나 다른 메서드 등에 사용할 경우
+		  리턴값이 전달되지 못하므로 undefined 값이 대신 전달됨(오류가 발생하지 않음)
+		*/
+		// 1. getMessage() 함수 호출
+		// => 전달인자가 없으므로 함수 호출 시 함수명 뒤의 소괄호 내에 아무 데이터도 전달하지 않음
+		// => 리턴값이 있으므로 리턴값을 저장할 변수를 함수 호출 코드 좌변에 선언하거나
+		//    함수 호출 코드를 출력문에 기술하여 리턴되는 값을 즉시 출력할 수도 있다!
+// 		getMessage(); // 리턴값이 있는 함수지만 리턴값을 전달받지 않아도 상관없다!
+		
+		// 리턴값을 전달받을 변수를 좌변에 선언
+// 		let message = getMessage();
+		// 함수 내의 리턴값이 "Hello, World!" 문자열이므로
+		// 해당 문자열이 리턴되어 변수 message 에 전달됨
+		// => 따라서, let message = "Hello, World!" 와 동일한 코드가 됨
+// 		document.write(`getMessage() 함수 리턴값 : ${message}<br>`);
+		
+		// 리턴값을 변수에 별도로 저장하지 않고, 다른 함수나 연산 등에서 즉시 활용 가능
+		document.write(`getMessage() 함수 리턴값22 : ${getMessage()}<br>`);
+		document.write(`<hr>`);
+		// -----------------------------------------------------------------------
+		// getTotal() 함수 호출하여 1 ~ 10 까지의 합계를 리턴받아 출력
+		let sum = getTotal();
+		document.write(`1 ~ 10 까지의 합 : ${sum}<br>`);
+		document.write(`<hr>`);
+		// -----------------------------------------------------------------------
+		// getTotal2() 함수 호출하여 1 ~ 10 까지의 합계에 대한 짝수 or 홀수 판별 결과를 리턴받아 출력
+		let result = getTotal2();
+		document.write(`1 ~ 10 까지의 합 : ${result}<br>`);
+		document.write(`<hr>`);
+		// ------------------------------------------------------
+		// 2번 유형의 대표적인 내장 함수 예제
+		// => prompt() 또는 confirm() 함수 사용 시 
+		//    입력되는 값을 리턴해주므로 전달받아 사용 가능
+		let data = prompt(); // 소괄호 안에 아무것도 전달하지 않으면 모달창에 출력되는 메세지는 없음
+		// 다만, 입력받은 값을 리턴해주므로 변수에 저장됨
+		document.write(`data : ${data}<br>`);
+		
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
