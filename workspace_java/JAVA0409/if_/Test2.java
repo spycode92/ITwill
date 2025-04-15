@@ -64,6 +64,18 @@ public class Test2 {
 		// => 대문자란? 'A'(65) 이상이고 'Z'( 90) 이하인 문자
 		// => 소문자와 대문자의 차이는 32만큼이다.
 		
+		ch = 'r';
+		
+		if(ch >= 'a' && ch <= 'z') { // 소문자 ch >= 97 && ch <= 122
+			System.out.println(ch + " : 소문자!");
+			// 소문자 -> 대문자로 변환
+			// 소문자와 대문자의 차이는 32만큼이므로 ch 값을 32만큼 빼면 대문자
+//			ch = (char)(ch - 32);
+			ch -= 32;
+			System.out.println("대문자로 변환한 결과 : " + ch);
+		} else {
+			System.out.println(ch + " : 소문자 아님!");
+		}
 
 	}
 
