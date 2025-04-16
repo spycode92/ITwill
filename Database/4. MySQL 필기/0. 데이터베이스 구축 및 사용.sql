@@ -144,8 +144,273 @@ values (109, '최승현', '1995-04-22', '간호사', '010-9999-9999', '서울 �
 select *
 from members;
 
+-- products 테이블에 데이터 삽입하기
+desc products;
+
+-- 수동으로 null값을 삽입하는 방법
+insert into products
+values (10, '냉장고', 500, null, '삼성');
+
+-- 추가 데이터 삽입하기
+insert into products
+values (20, '컴퓨터', 150, '2022-01-13', '애플'),
+	   (30, '세탁기', 250, '2020-03-10', 'LG'),
+       (40, 'TV', 200, '2021-09-30', 'LG'),
+	   (50, '전자렌지', 50, '2019-06-20', '삼성'),
+       (60, '건조기', 300, '2021-07-09', 'LG');
+
+select *
+from products;
+
+-- orders 테이블에 데이터 삽입하기
+desc orders;
+
+insert into orders
+values (1, 101, 20, '2022-02-01');
+
+insert into orders
+values (2, 107, 40, '2022-02-05 17:51');
+
+insert into orders
+values (3, 106, 50, now());
+
+-- 자동으로 default값 삽입하는 방법
+insert into orders(order_num, member_id, prod_id)
+values (4, 103, 10);
+
+-- 수동으로 default값 삽입하는 방법
+insert into orders
+values (5, 108, 50, default);
+
+insert into orders
+values (6, 103, 30, default);
+
+insert into orders
+values (7, 105, 50, default);
+
+-- 추가 데이터 삽입하기
+insert into orders
+values (8, 110, 40, '2021-12-30 10:30:45'),
+	   (9, 107, 30, default),
+       (10, 101, 60, now());
+
+select *
+from orders;
+
+-- stu20 테이블에 데이터 삽입하기
+desc stu20;
+
+insert into stu20
+values (null, '김온달', 28);
+
+insert into stu20
+values (null, '이평강', 24);
+
+-- 시작값 변경
+alter table stu20 auto_increment = 100;
+
+insert into stu20
+values (null, '최찬미', 29);
+
+insert into stu20
+values (null, '김동희', 31);
+
+-- 증가값(증가 사이즈) 변경
+set @@auto_increment_increment=5;
+
+insert into stu20
+values (null, '박혜경', 22);
+
+insert into stu20
+values (null, '문진원', 27);
+
+select *
+from stu20;
+
 -- (2) Date 수정(update)
+-- [문법] update 테이블명
+--       set 컬럼명 = 값
+--      [where 조건문];
+
+-- products 테이블의 모든 상품 가격을 50씩 인상하시오.
+update products
+set price = price + 50;
+
+-- products 테이블의 TV 제품 가격을 30 인상하시오.
+update products
+set price = price + 30
+where prod_name = 'tv';
+
+select *
+from products;
+
+-- members 테이블의 105번 회원 전화번호를 010-5050-5050으로 변경하시오.
+update members
+set phone = '010-5050-5050'
+where member_id = 105;
+
+select *
+from members;
+
+-- orders 테이블 2번 주문의 주문자(member_id)를 109으로 변경하시오.
+update orders
+set member_id = 109
+where order_num = 2;
+
+select *
+from orders;
 
 -- (3) Data 삭제(delete)
+-- [문법] delete from 테이블명
+--      [where 조건문];
+-- 테이블의 특정 행이 삭제되는 명령어
 
+-- stu20 테이블에서 나이가 25세 이하인 학생을 삭제하시오.
+delete from stu20
+where age <= 25;
 
+-- stu20 테이블의 모든 학생을 삭제하시오.
+delete from stu20;
+
+select *
+from stu20;
+
+-- 4. 데이터 검색
+-- [문법] select * | 컬럼1, 컬럼2, 컬럼3, ...
+--       from 테이블명
+--      [where 조건문];
+
+-- 테이블의 모든 컬럼, 모든 행 검색하기
+select *
+from members;
+
+select *
+from products;
+
+select *
+from orders;
+
+-- 테이블의 특정 컬럼 검색하기
+select member_id, member_name, phone
+from members;
+
+select company, prod_name, price
+from products;
+
+-- 테이블의 특정 행 검색하기
+-- 테이블의 특정 행 검색을 원하는 경우에는 where절을 작성해야함.
+-- [문법] select * | 컬럼1, 컬럼2, 컬럼3, ...
+--       from 테이블명
+--       where  좌변      =    우변;
+--            (컬럼명)(비교연산자)(값) -> 숫자, '문자', '날짜'
+
+-- members 테이블에서 member_id가 105번인 회원만 검색하시오.
+select *
+from members
+where member_id = 105;
+
+-- members 테이블에서 이름이 '홍길동'인 회원만 검색하시오.
+select *
+from members
+where member_name = '홍길동';
+
+-- members 테이블에서 '회사원'이 아닌 회원만 검색하시오.
+select *
+from members
+where job <> '회사원';
+
+-- products 테이블에서 가격이 300 이상인 제품의 이름, 가격, 제조사를 검색하시오.
+select prod_name, price, company
+from products
+where price >= 300;
+
+-- members 테이블에서 생년월일이 1990년 이전인 회원들의 이름, 생년월일,
+-- 전화번호, 주소를 검색하시오.
+select member_name, birth, phone, address
+from members
+where birth < '1990-01-01';
+
+-- where절에 여러 조건문 작성하기
+-- where절에 조건문을 여러 개 작성할 경우 AND, OR로 나열해야함.
+
+-- products 테이블에서 가격이 300이상 500이하인 제품만 검색하시오.
+select *
+from products
+where price >= 300 and price <= 500;
+
+-- products 테이블에서 LG 제품이면서 가격이 300 이하인 제품만 검색하시오.
+select *
+from products
+where company = 'lg' and price <= 300;
+
+-- members 테이블에서 생년월일이 1990년 이전이거나 1991년 이후인
+-- 회원만 검색하시오.
+select *
+from members
+where birth < '1990-01-01' or birth > '1991-12-31';
+
+-- where절에 and와 or를 함께 사용한 예제
+-- (예제1) and가 or보다 우선순위가 높다.
+select *
+from products
+where company = 'LG'
+or    company = '삼성'
+and   price <= 300;
+
+-- (예제2) or를 먼저 작업하고 싶다면 괄호 사용해야함.
+select *
+from products
+where (company = 'LG'
+or     company = '삼성')
+and   price <= 300;
+
+-- 데이터 검색 시 정렬하기
+-- [문법] select * | 컬럼1, 컬럼2, ...
+--       from 테이블명
+--      [where 조건문]
+--      [order by 컬럼명 [asc(default) | desc]];
+
+-- 숫자 컬럼 기준으로 정렬하기
+select *
+from products
+order by price;
+
+select *
+from products
+order by price desc;
+
+select *
+from orders
+order by member_id;
+
+-- 날짜 컬럼 기준으로 정렬하기
+select *
+from products
+order by make_date;
+
+select *
+from products
+order by make_date desc;
+
+select *
+from products
+where make_date is not null
+order by make_date desc;
+
+-- 문자 컬럼을 기준으로 정렬하기
+select *
+from members
+order by member_name;
+
+select *
+from members
+order by member_name desc;
+
+-- 여러 컬럼을 기준으로 정렬하기
+select *
+from members
+order by member_name desc, birth;
+
+select *
+from members
+order by member_name desc, birth desc;
