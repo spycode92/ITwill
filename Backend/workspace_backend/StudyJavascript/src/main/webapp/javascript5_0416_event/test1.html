@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test1.js"></script>
+</head>
+<body>
+	<h1>test1.html - EVENT</h1>
+	<!-- 
+	HTML 태그를 사용하여 버튼 생성하기
+	1. <input> 태그의 type="button" 속성(또는 "reset", "submit") 사용(value 속성으로 버튼에 표시할 텍스트 지정)
+	2. <button> 태그 사용(<button> 태그와 </button> 태그 사이에 버튼에 표시할 텍스트 지정)
+	   => 버튼의 종류는 type="xxx" 속성("button", "reset", "submit") 사용
+	   => type 속성 생략 시 기본값 : "submit"
+	-->
+	<input type="button"> <!-- 버튼 텍스트가 없는 일반 버튼 -->
+	<input type="button" value="버튼"> <!-- "버튼" 이라는 텍스트가 표시된 일반 버튼 -->
+	<button>버튼2</button> <!-- "버튼2" 텍스트가 표시된 submit 버튼 -->
+	<hr>
+	
+	<!-- 버튼 7개 생성(버튼1 ~ 버튼7 까지 각각 텍스트 표시) -->
+	<!-- 각 버튼 "클릭(click)" 시 특정 동작을 수행하도록 처리(= "click" 이벤트에 대한 핸들링(처리) 필요) -->
+	<!-- 버튼 태그의 onclick 속성을 사용하여 버튼 "클릭" 이벤트 처리 => 속성값으로 함수 호출 코드 기술 -->
+	<!-- 1) 버튼1 "클릭" 시 alert() 함수를 호출하여 "버튼1 클릭" 메세지 출력 -->
+	<input type="button" value="버튼1" onclick="alert('버튼1 클릭')">
+	<!-- 2) 버튼2 "클릭" 시 alert() 함수를 호출하여 "버튼2 클릭" 메세지 출력 -->
+	<input type="button" value="버튼2" onclick="alert('버튼2 클릭')">
+	<!-- 3) 버튼3 "더블클릭(dblclick)" 시 alert() 함수 호출하여 "버튼3 더블클릭" 출력 -->
+	<!--    하나의 HTML 요소에 복수개의 이벤트 연결 가능 -->
+	<input type="button" value="버튼3" ondblclick="alert('버튼3 더블클릭')"
+		onmouseover="console.log('mouseover')" onmouseout="console.log('mouseout')">
+		
+	<!-- 버튼4 클릭 시 사용자 정의 함수 btnClick() 함수 호출(전달인자 없음) -->
+	<!-- btnClick() 함수 내에서 alert() 함수를 통해 "버튼4 클릭" 메세지 출력하기 -->	
+	<input type="button" value="버튼4" onclick="btnClick()">
+	<!-- 하나의 함수를 여러 요소에서 이벤트 연결이 가능 -->
+	<!-- 버튼5 클릭 시 기존 사용자 정의 함수 btnClick() 호출(함수의 재사용) -->
+	<input type="button" value="버튼5" onclick="btnClick()">
+	
+	<!-- 버튼6 클릭 시 사용자 정의 함수 btnClick2() 함수 호출 -->
+	<!-- 전달인자로 문자열 1개를 전달하면 함수 내에서 alert() 함수 사용하여 문자열 출력 -->
+	<input type="button" value="버튼6" onclick="btnClick2('Hello, World!')">
+	
+	<!-- 버튼7 클릭 시 사용자 정의 함수 btnClick3() 함수 호출 -->
+	<!-- 전달인자로 정수 2개를 전달하면 함수 내에서 두 수의 합을 계산하여 출력 -->
+	<input type="button" value="버튼7" onclick="btnClick3(10, 20)">
+	
+	<hr>
+	
+	<!-- [숫자게임 시작] 버튼 생성 -->
+	<!-- 버튼 클릭 시 startNumberGame() 함수 호출 -->
+	<input type="button" value="숫자게임 시작" onclick="startNumberGame()">
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

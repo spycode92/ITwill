@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test4.js"></script>
+</head>
+<body>
+	<h1>test4.html</h1>
+	<script type="text/javascript">
+		// 1. 정수 1개(x)를 전달하면 1 ~ x 까지의 합계를 계산하여 리턴하는 sum() 함수 호출
+		// => 리턴값을 받아서 출력하기
+		let x = 10;
+		document.write(`1 ~ ${x} 까지의 합 = ${sum(x)}<br>`);
+		// -------------------------------------------------------------------------------
+		// 2. 정수 1개(num)를 전달하면 해당 정수의 절대값을 계산하여 리턴하는 abs() 함수 호출
+		//    ex) -5 전달 시 5 리턴, 10 전달 시 10 리턴
+		let num = -5;
+		document.write(`${num} 의 절대값 = ${abs(num)}<br>`);
+		document.write(`${10} 의 절대값 = ${abs(10)}<br>`);
+		// -------------------------------------------------------------------------------
+		// 3. 아이디(id)와 패스워드(passwd)를 전달하면 "로그인 성공"/"로그인 실패"를 리턴하는
+		//    login() 함수 정의
+		//    => 로그인 성공 아이디 : admin, 패스워드 : 0123
+		document.write(`${login("admin", "0123")}<br>`);
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
