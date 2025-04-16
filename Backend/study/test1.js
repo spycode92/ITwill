@@ -15,27 +15,57 @@ function btnClick3(num1, num2){
 function startNumberGame() {
 	let correctNum = 5;
 	let t = 1;
-	let num = prompt(`숫자를 입력하세요!`);
-	if(Number(num) !== NaN){
-		while(true){
-			if (num == correctNum){
-				alert(`${t}번만에 정답입니다!`)
-				break
-			} else if(num > correctNum){
-				alert(`입력한 숫자보다 정답이 작습니다!`)
-				num = prompt(`숫자를 입력하세요!`);
+	
+	while(true){
+		let num = prompt(`숫자를 입력하세요!`);
 
-			} else if(num < correctNum){
-				alert(`입력한 숫자보다 정답이 큽니다!`)
-				num = prompt(`숫자를 입력하세요!`);
-			}
-			t++
+//		if (num){
+//			alert(`${num}`)
+//		} else if(!num){
+//			alert(`${num}111111`)
+//			
+//		}
+		
+		if (!num){
+			alert(`게임을 종료합니다 !`)
+			break
+		} else if(num > correctNum){
+			alert(`입력한 숫자보다 정답이 작습니다!`)
+			
+
+		} else if(num < correctNum){
+			alert(`입력한 숫자보다 정답이 큽니다!`)
+			
+		} else if(num == correctNum){
+			alert(`${t}번만에 정답입니다!`)
+			break
+		} else{
+			alert(`게임을 종료합니다 !`)
+			break
 		}
-	} else {
-		alert(`게임을 종료합니다.`);
-		return
-
+		t++
+				
+//		if (num == correctNum){
+//			alert(`${t}번만에 정답입니다!`)
+//			break
+//		} else if(num > correctNum){
+//			alert(`입력한 숫자보다 정답이 작습니다!`)
+//			
+//
+//		} else if(num < correctNum){
+//			alert(`입력한 숫자보다 정답이 큽니다!`)
+//			
+//		} else if(!num){
+//			alert(`게임을 종료합니다!`)
+//			break
+//		} else {
+//			alert(`게임을 종료합니다!`)
+//			break
+//		}
+		
 	}
+	return
+	
 	
 	
 	
