@@ -1,0 +1,206 @@
+﻿<html>
+ <head> 
+  <title>list - 목록 만들기</title>
+ </head>
+ <body>
+  <hr>
+  <h1>list - 목록 만들기</h1>
+  <hr>
+  <h2>html 목록 종류</h2>
+  <p>
+   &lt;ul&gt; - 순서 없는 목록<br>
+   &lt;ol&gt; - 순서 있는 목록<br>
+   &lt;dl&gt; - 정의 목록
+  </p>
+  <hr>
+  <h2>ul (Unordered List) - 순서 없는 목록</h2>
+  <ul>
+   <li>html</li>
+   <li>css</li>
+   <li>js</li>
+  </ul>
+
+  <ul>
+   <li>coffee</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+  </ul>
+
+  <h4>문제. 순서 없는 목록 만들기</h4>
+  <ul>
+   <li>감</li>
+   <li>배</li>
+   <li>밤</li>
+   <li><b>귤</b></li>
+  </ul>
+
+  <hr>
+  <h2>ol (Ordered List) - 순서 있는 목록</h2>
+  <ol>
+   <li>html</li>
+   <li>css</li>
+   <li>js</li>
+  </ol>
+  
+  <ol>
+   <li>coffee</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+  </ol>
+
+  
+  <h3>ol 앞의 모양 바꾸기 - type="<i>1</i>/a/A/i/I"</h3>
+  <ol type="1">
+   <li>coffee (type="1")</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+
+  <ol type="a">
+   <li>coffee (type="a")</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+
+  <ol type="A">
+   <li>coffee  (type="A")</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+
+  <ol type="i">
+   <li>coffee (type="i")</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+
+  <ol type="I">
+   <li>coffee (type="I")</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+
+  <h3>ol 앞의 시작 바꾸기 - start="n"</h3>
+  <ol start="9">
+   <li>coffee</li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+
+  <h4>문제. F로 시작하는 목록 만들기</h4>
+  <ol type="A" start="6">
+   <li>coffee (type="A" start="6") </li>
+   <li>tea</li>
+   <li>milk</li>
+   <li>water</li>
+   <li>cookie</li>
+  </ol>
+  
+  <hr>
+  <h3>하위목록 만들기</h3>
+  <ul>
+   <li>html
+    <ul>
+     <li>tag</li>
+     <li>속성</li>
+     <li>content</li>
+    </ul>
+   </li> <!-- /li 의 위치 주의 -->
+   <li>css
+    <ul>
+     <li>선택자</li>
+     <li>속성</li>
+    </ul>
+   </li> 
+   <li>js</li>
+  </ul>
+
+  <ol>
+   <li>coffee
+    <ol>
+     <li>hot
+      <ul>
+       <li>ame</li>    
+       <li>cafe</li>
+      </ul>
+     </li>
+     <li>cold</li>
+    </ol>
+   </li>
+   <li>tea</li>
+   <li>milk
+    <ul> 
+     <li>hot</li>
+     <li>cold</li>  
+    </ul>
+   </li>
+  </ol>
+
+  <hr>
+  <h2>dl (Description List) - 정의 목록</h2>
+  <dl>
+   <dt>html</dt>
+   <dd>Hyper Text Markup Language의 약자.</dd>
+  </dl>
+  
+  <dl>
+   <dt>&lt;dl&gt;</dt>
+   <dd>정의 목록을 구성하는 태그</dd>
+   <dt>&lt;dt&gt;</dt>
+   <dd>정의 대상을 지정하는 태그</dd>
+   <dt>&lt;dd&gt;</dt>
+   <dd>정의 내용을 지정하는 태그</dd>
+  </dl>
+
+  <dl>
+   <dt>html</dt>
+   <dd>Hyper Text Markup Language의 약자.</dd>
+   <dd>웹문서를 만드는 표준 프로그램 언어.</dd>
+   <dd>웹문서의 구조를 담당.</dd>
+  </dl>
+
+
+
+
+  <h4>문제. 본인을 3가지 관점에서 정의하는 정의 목록 만들기</h4>
+  <dl>
+   <dt>김영희</dt>
+   <dd>아이티윌부산 웹강사</dd>
+   <dd>html과 css 담당</dd>
+   <dd>목요일 오후에 만나요</dd>
+  </dl>
+   
+  
+
+
+
+
+ </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
