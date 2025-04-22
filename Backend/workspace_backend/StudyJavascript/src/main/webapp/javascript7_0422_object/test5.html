@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test5.js"></script>
+</head>
+<body>
+	<h1>test5.html - location</h1>
+	<input type="button" value="URL정보 확인" onclick="func1()">
+	<input type="button" value="URL정보 변경" onclick="func2()">
+	<input type="button" value="URL정보 새로고침" onclick="func3()">
+	<br>
+	<input type="text">
+	<hr>
+	<!-- http://www.itwillbs.co.kr -->
+	<input type="button" value="새 창 열기(아이티윌)" onclick="openWindow()">
+	<input type="button" value="새 창 URL정보 확인" onclick="popupInfo()">
+	<hr>
+	<table border="1">
+		<tr>
+			<td rowspan="2">
+				<img src="../images/2.jpg" width="300" height="250">
+			</td>
+			<td align="center">
+				<h3>자동차</h3>
+				<h4>금액 : 30000원</h4>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<!-- 장바구니담기 버튼 클릭 시 addCart() 함수 호출 -->
+				<input type="button" value="장바구니담기" onclick="addCart()">
+				<!-- 즉시구매 버튼 클릭 시 test5_order.html 페이지로 이동 -->
+				<input type="button" value="즉시구매" onclick="location.href='./test5_order.html'">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

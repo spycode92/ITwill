@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>document 객체 기초</title>
+	<script src="test7.js"></script>
+	<script type="text/javascript">
+		console.log(document); // document 객체 전체 내용(= 모든 HTML 문서 내용) 출력
+		console.log(document.documentElement); // <html> 태그 내용 출력
+		console.log(document.head); // <head> 태그 내용 출력
+		console.log(document.body); // null 값 출력됨
+		// => 현재 실행되는 자바스크립트 코드는 <head> 태그 사이에 위치해 있으므로
+		//    이 코드들이 실행되는 시점에 head 객체까지는 생성이 되어있으나
+		//    아직 <body> 태그를 로딩하지 않아 body 객체가 생성되지 않은 상태이다!
+		//    즉, body 객체를 통해 작업이 불가능한 상태임을 의미함(= 객체가 없음)
+		// => 따라서, <body> 태그가 로딩된 후에 document.body 형식으로 body 객체에 접근해야함
+	</script>
+</head>
+<body>
+	<script type="text/javascript">
+		console.log("<body> 태그 로딩됨!");
+		console.log(document.body); // <body> 태그 로딩 된 상태이므로 body 객체 접근 가능
+		// => 결론! DOM 트리 구조에서 각 객체 생성 시점에 따라 접근 가능 여부가 달라진다!!!!
+	</script>
+	<h1>test6.html</h1>
+	<input type="text" id="name" placeholder="id=name"><br>
+	<input type="text" id="name2" placeholder="id=name2"><br>
+	<input type="button" value="확인" onclick="func1()">
+	<hr>
+	<h3 id="header1">Header - 1</h3>
+	<h3 id="header2">Header - 2</h3>
+	<h3 id="header3">Header - 3</h3>
+	<h3 id="header4" class="header_class4">Header - 4</h3>
+	<h3 class="header_class5">Header - 5_1</h3>
+	<h3 class="header_class5">Header - 5_2</h3>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
