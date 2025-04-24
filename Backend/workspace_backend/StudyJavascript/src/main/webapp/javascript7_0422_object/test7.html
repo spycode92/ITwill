@@ -22,17 +22,21 @@
 		console.log(document.body); // <body> 태그 로딩 된 상태이므로 body 객체 접근 가능
 		// => 결론! DOM 트리 구조에서 각 객체 생성 시점에 따라 접근 가능 여부가 달라진다!!!!
 	</script>
-	<h1>test6.html</h1>
+	<h1>test7.html</h1>
 	<input type="text" id="name" placeholder="id=name"><br>
 	<input type="text" id="name2" placeholder="id=name2"><br>
 	<input type="button" value="확인" onclick="func1()">
 	<hr>
-	<h3 id="header1">Header - 1</h3>
-	<h3 id="header2">Header - 2</h3>
-	<h3 id="header3">Header - 3</h3>
-	<h3 id="header4" class="header_class4">Header - 4</h3>
-	<h3 class="header_class5">Header - 5_1</h3>
-	<h3 class="header_class5">Header - 5_2</h3>
+	<h1 id="header1">Header - 1</h1>
+	<h2 id="header2">Header - 2</h2>
+	<h4 id="header3">Header - 3</h4>
+	<!-- 하나의 태그에 복수개의 class 지정 시 class="클래스1 클래스2..." 형태로 지정 -->
+	<h4 id="header4" class="header_class4 header_class5">Header - 4</h4>
+	<h5 class="header_class5">Header - 5_1</h5>
+	<h5 class="header_class5" id="header_class5_2">
+		<!-- 주석입니다. -->
+		<i>Header - 5_2</i>
+	</h5>
 </body>
 </html>
 
