@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test1.js"></script>
+</head>
+<body>
+	<h1>test1.html - event</h1>
+	<!-- 
+	[ 대표적인 이벤트 종류 ]
+	1) click : 마우스 클릭, dblclick : 마우스 더블클릭
+	2) mouseover : 마우스가 대상 위에 위치(= mouseenter 유사)
+	   mouseout : 마우스가 대상에서 빠져나감(= mouseleave 유사)
+	3) focus : 대상이 선택됨(= 포커스가 위치함), blur : 대상 선택이 해제됨(= 포커스 잃음)
+	4) change : 대상 선택이 해제될 때(포커스 잃음) 대상 요소의 값(value 속성값)이 변경됨
+	5) load : 대상 요소가 로딩 완료됨, onload : 대상 요소 로딩 해제됨
+	6) keydown : 키보드의 키 누름, keyup : 키보드의 키 뗌, keypress : 키보드의 키 누름
+	7) submit : 폼 데이터 전송(submit 버튼 클릭 등), reset : 폼 데이터 초기화
+	-->
+	<!-- images/1.jpg 이미지 표시(width : 150픽셀, height : 100픽셀) -->
+	<!-- mouseover 이벤트 발생 시 "2.jpg" 이미지 표시, mouseout 이벤트 발생 시 "3.jpg" 이미지 표시 -->
+	<img src="../images/1.jpg" width="150" height="100" id="img1"
+		onmouseover="document.querySelector('#img1').src = '../images/2.jpg'" 
+		onmouseout="document.querySelector('#img1').src = '../images/3.jpg'">
+	<br>
+	<!-- "이미지복원" 버튼 "클릭" 시 id 선택자 img1 요소 이미지를 1.jpg 로 변경(되돌리기) -->
+	<input type="button" value="이미지복원" onclick="changeImage()">
+	<hr>
+	<!-- changeImage2() 함수 호출 전달인자로 키워드 this 지정하면 현재 태그 요소 객체가 함수에 전달됨 -->
+	<!-- 따라서, document.querySelector() 등을 통해 객체 접근 코드가 불필요하게 됨 -->
+	<img src="../images/2.jpg" id="img2" width="150" height="100" onclick="changeImage2(this)">
+	<!-- changeImage3() 함수 호출 전달인자로 키워드 event 지정하면 현재 태그 요소에서 발생한 이벤트 객체가 전달됨 -->
+	<img src="../images/3.jpg" id="img3" width="150" height="100" onclick="changeImage3(event)">
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
