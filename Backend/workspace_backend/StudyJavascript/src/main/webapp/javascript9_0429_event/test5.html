@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test5.js"></script>
+</head>
+<body>
+	<h1>test5.jsp</h1>
+	<form action="test5_result.html" name="fr" method="post">
+		<!-- 
+		<form> 태그 내의 입력 요소들이 입력되지 않았을 경우 submit 동작이 수행되지 않도록 하려면
+		각 입력 요소에 required 속성 설정 시 submit 동작 시점에 입력값을 체크해준다!
+		=> required 설정 항목 중 입력되지 않은 요소가 있을 경우 submit 동작이 취소됨
+		-->
+<!-- 		텍스트 <input type="text" name="text1" required="required"> -->
+		텍스트 <input type="text" name="text1">
+		<input type="button" value="focus" id="btnFocus">
+		<input type="button" value="select" id="btnSelect">
+		<br>
+		<div id="text1Area"></div>
+		
+		<!-- required 속성 설정 시 속성값 생략 가능함(단일 속성값이므로 불필요) -->
+<!-- 		히든텍스트 <input type="password" name="text2" required title="8~16자리 영문자,숫자,특수문자"> -->
+		히든텍스트 <input type="password" name="text2">
+		<br>
+		<div id="text2Area"></div>
+		
+<!-- 		멀티라인텍스트 <textarea rows="5" cols="20" name="ta" required></textarea> -->
+		멀티라인텍스트 <textarea rows="5" cols="20" name="ta"></textarea>
+		<br>
+		<div id="taArea"></div>
+		
+		<input type="button" value="입력값 출력" id="btnShowInfo">
+		<input type="button" value="입력값 체크" id="btnCheckInfo">
+		<input type="submit" value="입력값 전송" id="btnSubmit">
+	</form>
+	<hr>
+	<div id="infoArea"></div>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

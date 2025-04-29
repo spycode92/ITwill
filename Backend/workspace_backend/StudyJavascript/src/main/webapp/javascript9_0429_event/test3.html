@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test3.js"></script>
+<script type="text/javascript">
+	// #img1 요소의 이미지 파일을 2.jpg 로 교체
+// 	document.getElementById("img1").src = "../images/2.jpg"; // 오류 발생
+	
+	/*
+	[ 스크립트 코드 실행 시점에 따른 문제점 ]
+	- 자바스크립트 코드 위치가 HTML 요소보다 앞(위)쪽일 경우
+	  HTML 요소가 로딩되기 전에 자바스크립트 코드가 실행됨
+	- 이 때, 자바스크립트에서 HTML 요소에 접근하려 할 경우 요소가 로딩되기 전이므로
+	  해당 객체가 존재하지 않아 null 값이 리턴되고 null 값에 접근하여 속성 변경 등은 불가능하다!
+	  즉, 대상 요소에 접근 시 오류가 발생함
+	  (ex. Uncaught TypeError: Cannot set properties of null (setting 'src'))
+	--------------------------------------------------------------------------------------------
+	[ 해결책 ]
+	1) 해당 요소 태그보다 아래쪽에 스크립트 코드 기술
+	2) 스크립트 코드 위치와 상관없이 모든 HTML 요소 로딩 완료된 후 스크립트가 실행되도록 하기
+	   => load 이벤트 활용(onload)
+	   2-1) <body> 태그에 load 이벤트(onload="xxx()" 형태)로 body 요소 로딩 완료 시 작업 실행
+	   2-2) window 객체의 load 속성을 통해 모든 요소 로딩 완료 시 작업 실행(window.onload=xxx())
+	        => 이 때, 실행할 함수는 별도의 함수로 정의하거나 익명 함수 형태로 정의할 수 있음
+	*/
+</script>
+</head>
+<!-- 해결책2-1) <body> 태그에 load 이벤트(onload="xxx()" 형태)로 body 요소 로딩 완료 시 작업 실행 -->
+<!-- <body onload="myFunc1()"> body 영역 로딩 완료 시 myFunc1() 함수 호출됨 -->
+<body>
+	<h1>test3.jsp</h1>
+	<!-- 1.jpg 이미지 표시 -->
+	<img src="../images/1.jpg" id="img1" width="150" height="100">
+	
+	<!-- 해결책1) 해당 요소 태그보다 아래쪽에 스크립트 코드 기술 -->
+	<script type="text/javascript">
+// 		document.getElementById("img1").src = "../images/2.jpg";
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

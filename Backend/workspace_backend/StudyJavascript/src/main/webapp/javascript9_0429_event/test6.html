@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test6.js"></script>
+</head>
+<body>
+	<h1>test6.jsp</h1>
+	<form action="test6_result.html" name="fr" method="post">
+		<!-- 라디오버튼에 required 속성 지정 시 동일한 그룹 내에서 하나만 선택하면 OK -->
+		라디오버튼
+<!-- 		<input type="radio" name="radio" required>라디오1 -->
+<!-- 		<input type="radio" name="radio" required>라디오2 -->
+		<input type="radio" name="radio" value="라디오1">라디오1
+		<input type="radio" name="radio" value="라디오2">라디오2
+		<input type="button" value="라디오버튼 선택완료" id="btnRadio">
+		<hr>
+		<!-- 체크박스에 required 속성 지정 시 그룹 상관없이 해당 항목은 무조건 선택해야함 -->
+		<!-- 만약, 복수개의 체크박스 중 하나만 체크해도 허용해야할 경우 required 사용 불가 -->
+		<!-- 자바스크립트를 통해 별도로 체크를 수행해야함 -->
+<!-- 		<input type="checkbox" name="check" required>체크박스1 -->
+<!-- 		<input type="checkbox" name="check" required>체크박스2 -->
+<!-- 		<input type="checkbox" name="check" required>체크박스3 -->
+		<input type="checkbox" name="check" value="체크박스1">체크박스1
+		<input type="checkbox" name="check" value="체크박스2">체크박스2
+		<input type="checkbox" name="check" value="체크박스3">체크박스3
+		<input type="checkbox" name="all_check" id="all_check"><label for="all_check">전체선택</label>
+		<input type="button" value="체크박스 선택완료" id="btnCheck">
+		<hr>
+		<input type="submit" value="입력값 전송" id="btnSubmit">
+	</form>
+	<hr>
+	<div id="infoArea"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

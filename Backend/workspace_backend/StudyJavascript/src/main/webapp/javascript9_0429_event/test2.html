@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="test2.js"></script>
+</head>
+<body>
+	<h1>test2.jsp</h1>
+	<!-- 텍스트박스 2개 생성(id 선택자 "text1", "text2") -->
+	<!-- 텍스트박스에 포커스 위치(= focus 이벤트) 시 changeColor1() 함수 호출 -->
+	<!-- 텍스트박스에 포커스 해제(= blur 이벤트) 시 changeColor2() 함수 호출 -->
+	텍스트1 : <input type="text" id="text1" onfocus="changeColor1()" onblur="changeColor2()">
+	<br>
+	<!-- 텍스트박스에 포커스 위치(= focus 이벤트) 시 changeColor3() 함수 호출(파라미터 : this) -->
+	<!-- 텍스트박스에 포커스 해제(= blur 이벤트) 시 changeColor4() 함수 호출(파라미터 : this) -->
+	텍스트2 : <input type="text" id="text2" onfocus="changeColor3(this)" onblur="changeColor4(this)">
+	<br>
+	<!-- 확인 버튼 클릭 시 showText2() 함수 호출 -->
+	<input type="button" value="확인" onclick="showText2()">
+	<hr>
+	
+	<!-- keyup, blur, change 이벤트 -->
+	텍스트3(keyup) : <input type="text" id="id1" onkeyup="checkId1(event)">
+	<span id="result1"></span>
+	<br>
+	
+	텍스트3(blur) : <input type="text" id="id2" onblur="checkId2(this)">
+	<span id="result2"></span>
+	<br>
+	
+	텍스트3(change) : <input type="text" id="id3" onchange="checkId3(this.value)">
+	<span id="result3"></span>
+	<br>
+	
+	<!-- keyup : 키보드를 누른 상태에서 뗄 때 실행 -->
+	<!-- keydown, keypress : 키보드를 누를 때 실행 -->
+	<!-- 단, keydown 은 모든 키를 인식, keypress 는 입력데이터가 있는 키만 인식 -->
+	텍스트4(keyxxx) : <input type="text" id="id4" 
+						onkeyup="console.log('keyup')"
+						onkeydown="console.log('keydown')"
+						onkeypress="console.log('keypress')">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
