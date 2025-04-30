@@ -98,6 +98,82 @@ select job_id, sum(salary)
 from employees
 group by job_id;
 
+-- employees 테이블에서 부서내 업무별 평균 급여를 출력하시오.
+select department_id, job_id, avg(salary)
+from employees
+group by department_id, job_id
+order by department_id;
+
+-- 부서별 사원의 수를 출력하시오.
+select department_id, count(last_name)
+from employees
+group by department_id;
+
+-- 부서 내 업무별 사원의 수를 출력하시오.
+select department_id, job_id, count(last_name)
+from employees
+group by department_id, job_id
+order by department_id;
+
+-- (3) having절
+-- [문법] select 컬럼명, 그룹함수(컬럼)
+--       from 테이블명
+--      [where 조건문]	-> 행 제한 조건문
+--      [group by 컬럼명]
+--      [having 조건문]	-> 행그룹 제한 조건문(그룹함수가 포함된 조건문)
+--      [order by 컬럼명 [asc | desc]];
+
+select job_id, sum(salary) payroll
+from employees
+where job_id not like '%REP%'
+group by job_id
+having sum(salary) > 13000
+order by payroll;
+
+-- <연습문제>
+-- 1.
+select round(avg(ifnull(commission_pct, 0)),2) as avg_comm
+from employees;
+
+-- 2.
+SELECT job_id, MAX(salary) "Maximum",
+			   MIN(salary) "Minimum",
+			   SUM(salary) "Sum",
+			   truncate(AVG(salary), 0) "Average"
+FROM employees
+GROUP BY job_id;
+
+-- 3.
+SELECT job_id, COUNT(*)
+FROM employees
+GROUP BY job_id;
+
+-- 4.
+SELECT manager_id, MIN(salary)
+FROM employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id
+HAVING MIN(salary) >= 6000
+ORDER BY MIN(salary) DESC;
+
+-- 5.
+SELECT MAX(salary) - MIN(salary) DIFFERENCE
+FROM employees;
+
+-- 6.
+SELECT COUNT(*) total, 
+       count(if(year(hire_date)=1995, 1, null)) "1995", 
+	   count(if(year(hire_date)=1996, 1, null)) "1996",
+       count(if(year(hire_date)=1997, 1, null)) "1997",
+       count(if(year(hire_date)=1998, 1, null)) "1998"
+FROM employees;
+-- (==)
+SELECT COUNT(*) total, 
+       SUM(if(year(hire_date)=1995, 1, 0)) "1995", 
+	   SUM(if(year(hire_date)=1996, 1, 0)) "1996",
+       SUM(if(year(hire_date)=1997, 1, 0)) "1997",
+       SUM(if(year(hire_date)=1998, 1, 0)) "1998"
+FROM employees;
 
 
 
