@@ -110,19 +110,38 @@ window.onload = function() {
 		
 		// 전체선택 체크박스가 "체크" 상태일 경우 다른 체크박스 모두 "체크" 상태로 변경하고
 		// 아니면 다른 체크박스 모두 "체크해제" 상태로 변경
-		if(this.checked) { // 전체선택 체크
-//			console.log("전체선택 체크됨!");
-			// 체크박스 checked 속성값을 true 로 변경
-			document.fr.check[0].checked = true;
-			document.fr.check[1].checked = true;
-			document.fr.check[2].checked = true;
-		} else { // 전체선택 체크해제
-//			console.log("전체선택 체크해제됨!");
-			// 체크박스 checked 속성값을 false 로 변경
-			document.fr.check[0].checked = false;
-			document.fr.check[1].checked = false;
-			document.fr.check[2].checked = false;
+//		if(this.checked) { // 전체선택 체크
+////			console.log("전체선택 체크됨!");
+//			// 체크박스 checked 속성값을 true 로 변경
+//			document.fr.check[0].checked = true;
+//			document.fr.check[1].checked = true;
+//			document.fr.check[2].checked = true;
+//		} else { // 전체선택 체크해제
+////			console.log("전체선택 체크해제됨!");
+//			// 체크박스 checked 속성값을 false 로 변경
+//			document.fr.check[0].checked = false;
+//			document.fr.check[1].checked = false;
+//			document.fr.check[2].checked = false;
+//		}
+
+		// ------------------------------------------
+		// 전체선택 체크박스 체크상태(true/false)에 따라 각 체크박스 상태가 동일하므로
+		// if 문 판별없이 전체선택 체크박스 체크상태값을 각 체크박스의 상태값으로 설정 가능
+//		document.fr.check[0].checked = this.checked;
+//		document.fr.check[1].checked = this.checked;
+//		document.fr.check[2].checked = this.checked;
+
+		// ------------------------------------------
+		// 위의 코드들의 중복 제거를 위해 for문으로 변경
+//		for(let i = 0; i < document.fr.check.length; i++) {
+//			document.fr.check[i].checked = this.checked;
+//		}
+		
+		// 향상된 for문으로 변경	
+		for(let item of document.fr.check) {
+			item.checked = this.checked;
 		}
+		
 	}
 	
 	
