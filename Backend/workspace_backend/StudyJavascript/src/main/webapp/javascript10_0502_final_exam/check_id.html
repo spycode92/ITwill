@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>아이디 중복확인</h1>
+	<div align="center">
+		<input type="text" id="id" placeholder="검색할 아이디 입력">
+		<input type="button" value="검색" id="btnChecKId">
+		<div id="checkIdResult"></div>
+	</div>
+	<script type="text/javascript">
+		// 검색버튼 클릭 이벤트 핸들링
+		document.getElementById("btnChecKId").onclick = function() {
+			let dbId = "admin"; // 데이터베이스에 저장되어있는 아이디를 조회했다고 가정(임시)
+			// -----------------------------------------------------
+			let id = document.getElementById("id").value;
+			
+			// 아이디가 입력되지 않았을 경우 경고창 출력하고 포커스 요청
+			if(id == "") {
+				alert("아이디 입력 필수!");
+				document.getElementById("id").focus();
+				return;
+			}
+			// -----------------------------------------------------
+			// 입력받은 아이디(id)와 DB 로부터 조회된 아이디(dbId) 일치여부 판별
+			if(id.length < 4 || id.length > 8) { // 아이디 입력값 길이 체크
+				document.getElementById("checkIdResult").innerText = "4 ~ 8자리만 사용 가능";
+				document.getElementById("checkIdResult").style.color = "RED";
+			} else if(id != dbId) { // 아이디 중복이 아닐 경우
+				document.getElementById("checkIdResult").innerText = "사용 가능한 아이디";
+				document.getElementById("checkIdResult").style.color = "GREEN";
+				
+				// checkIdResult 영역에 "아이디 사용" 버튼 추가(innerHTML 활용)
+				let newButton = `<br><input type="button" value="아이디 사용" id="useId">`;
+				document.getElementById("checkIdResult").innerHTML += newButton;
+				
+				// ============================================================
+				// 아이디사용 버튼 클릭 이벤트 핸들링
+				// => 주의! 문서 로딩 시점에는 해당 버튼이 없으므로 버튼 생성 후 이벤트 핸들링 필수!
+				//    아니면, 버튼의 onclick 속성을 사용하여 이벤트 핸들링해도 동일함(onclick="xxx()")    
+				document.getElementById("useId").onclick = function() {
+// 					alert("확인");
+					
+					// 현재창(자식창 = check_id.html)에서 부모창(final_exam.html)의
+					// 아이디 입력 텍스트박스에 접근하여 입력받은 아이디값을 표시
+					// => 현재창을 관리하는 윈도우 객체(window)의 opener 속성에 접근하면
+					//    자식창에서 부모창을 제어할 수 있다!
+					// 부모창 아이디 입력란에 아이디 표시하기
+					window.opener.document.joinForm.id.value = id;
+					
+					// 자식창에서 동일한 방법으로 부모창의 전역변수에도 접근 가능함
+					// 부모창의 resultCheckId 변수값을 true 로 변경
+					window.opener.resultCheckId = true;
+					
+					// 부모창의 checkIdResult 영역에 "아이디 사용 가능" 텍스트 초록색으로 표시
+					window.opener.document.getElementById("checkIdResult").innerText = "아이디 사용 가능";
+					window.opener.document.getElementById("checkIdResult").style.color = "GREEN";
+					
+					// 현재창(자식창) 닫기
+					window.close();
+				}
+			} else { // 아이디 중복
+				document.getElementById("checkIdResult").innerText = "사용 불가능한 아이디";
+				document.getElementById("checkIdResult").style.color = "RED";
+				
+				// 부모창의 resultCheckId 변수값을 false 로 변경
+				window.opener.resultCheckId = false;
+			}
+		}
+		
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
