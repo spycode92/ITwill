@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	/*
+	특정 요소에 대한 조작 이벤트 - 2
+	- 지정한 대상의 특정 위치에 내용 추가하기
+	1. append()
+	   - 지정한 내용을 '선택자 내부'의 '마지막'에 추가
+	   - appendTo() 함수와 문장 구조의 차이를 제외하면 기능은 동일함
+	   - $('선택자').append('추가할내용');
+	     $('추가할내용').appendTo('선택자');
+	2. prepend()
+	   - 지정한 내용을 '선택자 내부'의 '처음'에 추가
+	   - prependTo() 함수와 문장 구조의 차이를 제외하면 기능은 동일함
+	   - $('선택자').prepend('추가할내용');
+	     $('추가할내용').prependTo('선택자');
+	3. after()
+	   - 지정한 내용을 '선택자 요소 외부'의 외부 '뒤'에 삽입
+	   - insertAfter() 함수와 문장 구조의 차이를 제외하면 기능은 동일함
+	   - $('선택자').after('삽입할내용');
+	     $('삽입할내용').insertAfter('선택자');
+	4. before()
+	   - 지정한 내용을 '선택자 요소 외부'의 '앞'에 삽입
+	   - insertBefore() 함수와 문장 구조의 차이를 제외하면 기능은 동일함
+	   - $('선택자').before('삽입할내용');
+	     $('삽입할내용').insertBefore('선택자');
+	*/
+	$(function() {
+		// ---------------------------------------------------------------
+		// 작업 결과 확인은 개발자 도구의 Elements 탭으로 추가된 요소 확인
+		// ---------------------------------------------------------------
+		// 1. append() 메서드
+		// #inside_append 요소 내의 맨 마지막 요소로 div 태그 추가
+		$("#inside_append").append("<div>****** append() 로 추가한 div 태그 ******</div>");
+		
+		// #resultArea1 영역에 #wrap_append 영역 내의 태그 내용 전체 출력(텍스트 형태로 출력)
+		$("#resultArea1").text($("#wrap_append").html());
+		
+		// ----------------------------------------------------------------------------------
+		// 2. prepend() 메서드
+		// #inside_prepend 요소 내의 맨 처음 요소로 div 태그 추가
+		$("#inside_prepend").prepend("<div>****** prepend() 로 추가한 div 태그 ******</div>");
+		
+		// #resultArea2 영역에 #wrap_prepend 영역 내의 태그 내용 전체 출력(텍스트 형태로 출력)
+		$("#resultArea2").text($("#wrap_prepend").html());
+		
+		// ----------------------------------------------------------------------------------
+		// 3. after() 메서드
+		// #inside_after 요소 바깥에서 요소 뒷쪽에 div 태그 추가
+		$("#inside_after").after("<div>****** after() 로 추가한 div 태그 ******</div>");
+		
+		// #resultArea3 영역에 #wrap_after 영역 내의 태그 내용 전체 출력(텍스트 형태로 출력)
+		$("#resultArea3").text($("#wrap_after").html());
+		
+		// ----------------------------------------------------------------------------------
+		// 4. before() 메서드
+		// #inside_before 요소 바깥에서 요소 앞쪽에 div 태그 추가
+		$("#inside_before").before("<div>****** before() 로 추가한 div 태그 ******</div>");
+		
+		// #resultArea4 영역에 #wrap_before 영역 내의 태그 내용 전체 출력(텍스트 형태로 출력)
+		$("#resultArea4").text($("#wrap_before").html());
+		
+	});
+</script>
+</head>
+<body>
+	<h1>test4.html</h1>
+	<div id="wrap">
+		<div id="wrap_append">
+			<div id="inside_append">
+				<div>div 태그-1</div>
+				<div>div 태그-2</div>
+				<!-- append() 메서드로 추가할 위치 -->
+			</div>
+		</div>
+		<hr>
+		<!-- ========================= -->
+		<div id="wrap_prepend">
+			<div id="inside_prepend">
+				<!-- prepend() 메서드로 추가할 위치 -->
+				<div>div 태그-3</div>
+				<div>div 태그-4</div>
+			</div>
+		</div>
+		<hr>
+		<!-- ========================= -->
+		<div id="wrap_after">
+			<div id="inside_after">
+				<div>div 태그-5</div>
+				<div>div 태그-6</div>
+			</div>
+			<!-- after() 메서드로 추가할 위치 -->
+		</div>
+		<hr>
+		<!-- ========================= -->
+		<div id="wrap_before">
+			<!-- before() 메서드로 추가할 위치 -->
+			<div id="inside_before">
+				<div>div 태그-7</div>
+				<div>div 태그-8</div>
+			</div>
+		</div>
+		<hr>
+	</div>
+	
+	<div id="resultArea1"></div>
+	<hr>
+	<div id="resultArea2"></div>
+	<hr>
+	<div id="resultArea3"></div>
+	<hr>
+	<div id="resultArea4"></div>
+	<hr>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

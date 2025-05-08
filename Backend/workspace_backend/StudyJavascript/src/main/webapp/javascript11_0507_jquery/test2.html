@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.7.1.js"></script>
+<script type="text/javascript">
+	/*
+	선택자(Selector)
+	- 문서 객체 내의 요소 선택을 위한 용도로 사용하는 구성 요소
+	- 자바스크립트에서 사용하는 document.getElementById("선택자명") 또는
+	  document.querySelector("선택자") 등의 메서드 호출과 달리
+	  jQuery 에서는 $("선택자") 형태로 대상을 지정하므로 문장이 간결해짐
+	
+	< 선택자 사용 기분 문법 >
+	$("선택자" 또는 "*").메서드명("속성명");            =>  특정 속성값 확인
+	$("선택자" 또는 "*").메서드명("속성명", "속성값");  =>  특정 속성값 변경
+	=> 선택자를 지정하는 대신 * 지정 시 문서 내의 모든 요소 지정
+	
+	ex) 지정한 요소에 대한 CSS 속성 변경하는 기본 문법
+	$("선택자").css("속성명", "속성값");
+	-----------------------------------------------------------------------------------
+	1. 직접 선택자 - 특정 대상(요소)을 직접 지정하기 위한 선택자
+	   1) 아이디(#) - 페이지 내에서 유일한 요소 => $("#선택자명")
+	   2) 클래스(.) - 복수개의 동일한 요소 => $(".선택자명")
+	   3) 태그 - 동일한 태그를 갖는 복수개의 요소 => $("태그명")
+	   4) 태그 속성 - 동일한 태그들 중 특정 속성만 지정 => $("태그명[속성명]")
+	   5) 태그 속성 값 - 동일한 태그의 동일한 속성들 중 특정 속성값 지정 => $("태그명[속성명=값]")
+	*/
+	
+	// document 객체의 ready 이벤트 핸들링
+// 	$(document).ready(function() {
+// 		alert("확인");
+// 	});
+	   
+	$(function() {
+		// 문서 내의 전체 요소(*)에 대한 CSS 속성값 변경 => css() 메서드 활용
+		// 모든 요소에 대한 글자색("color" 속성)에 대한 속성값을 "red" 로 변경
+		$("*").css("color", "red");
+		console.log(`color 속성값 : ${$("*").css("color")}`); // rgb(255, 0, 0) 
+		// => 속성명만 파라미터로 전달 시 해당 속성의 속성값 리턴
+		//    단, 속성을 지정하는 대상이 복수개일 때 첫번째 속성값만 리턴됨
+		
+		// id 선택자(#) 중 "idSelector" 라는 이름을 갖는 요소의 "글자색"을 "blue" 로 변경
+		$("#idSelector").css("color", "blue"); 
+		console.log(`#idSelector - color 속성값 : ${$("#idSelector").css("color")}`); // rgb(0, 0, 255)
+		
+		// 여전히 첫번째 요소의 color 속성값은 red 이므로 rgb(255, 0, 0) 출력됨
+// 		console.log(`color 속성값 : ${$("*").css("color")}`); 
+		
+		// class 선택자(.) 중 "classSelector" 라는 이름을 갖는 요소의 "글자색"을 "orange" 로 변경
+		$(".classSelector").css("color", "orange");
+		
+		// 태그 선택자(태그명) 중 "table" 태그 지정하여 테두리 종류 및 두께, 색상과 배경색 변경
+		// 1) table 태그의 테두리("border" 속성)를 "2px solid blue" 로 변경
+// 		$("table").css("border", "2px solid blue");
+		// 2) table 태그의 배경색("backgroundColor" 속성)을 "yellow" 로 변경
+// 		$("table").css("backgroundColor", "yellow");
+		
+		// 동일한 대상(객체)에 복수개의 메서드를 연속적으로 호출하는 경우
+		// 각 메서드를 서로 연결하여 연쇄적인 작업 수행 가능
+// 		$("table").css("border", "2px solid blue").css("backgroundColor", "pink");
+		
+		// 동일한 대상에 동일한 메서드를 여러번 호출하여 복수개의 속성을 변경하는 경우
+		// css() 메서드 내에서 블럭{} 을 통해 복수개의 속성을 한꺼번에 변경 가능(객체 지정 문법)
+		// => 실제 CSS 표현 방식과 유사함
+		$("table").css({
+			border: "1px solid yellow",
+			backgroundColor: "skyblue"
+		});
+		// -------------------------------------------------------------------
+		// 태그 선택자 지정 시 태그가 가진 특정 속성 또는 속성값까지 지정 가능
+		// => $("태그명[속성명]") 또는 $("태그명[속성명=속성값]")
+		// input 태그들 중 type 속성이 text 인 요소의 배경색 yellow 로 변경
+		$("input[type=text]").css("backgroundColor", "yellow");
+		// ===============================================================================
+		/*
+		2. 인접 관계 선택자
+		   1) 자식 선택자(>) - 특정 선택자의 바로 하위 요소(자식) 선택
+		      => $("부모선택자 > 자식선택자")
+		   2) 후손 선택자(공백) - 특정 선택자의 하위에 있는 모든 일치하는 요소 선택
+		      => $("부모선택자 자식선택자")
+		   3) 형제 선택자
+		      3-1) 바로 다음 형제 선택자(+)
+		      => $("선택자 + 바로 다음 형제 선택자")
+		      3-2) 뒷쪽 모든 형제 선택자(~)
+		      => $("선택자 + 뒷쪽 모든 형제 선택자")
+		*/
+		// id 선택자 "inputBox" 인 요소 내에 있는 input 태그 type 속성이 text 인 요소에 접근하여
+		// 1) 해당 요소의 배경색 "lightgray" 로 변경
+		$("#inputBox > input[type=text]").css("backgroundColor", "lightgray");
+		// 2) 입력된 텍스트 값 가져와서 변수에 저장 후 출력
+		let id = $("#inputBox > input[type=text]").val();
+		console.log("id : " + id);
+		
+		// 단, id 선택자가 지정된 요소는 id 선택자로 접근하는 것이 가장 편리함
+		// id 선택자 "passwd" 인 요소의 value 속성값 가져와서 출력
+		let passwd = $("#passwd").val();
+		console.log("passwd : " + passwd);
+		
+		// 자식 선택자와 후손 선택자 차이점 비교
+		// 1) 자식선택자(>) 활용하여 id 선택자 "divBox" 인 요소의 자식 div 태그들의
+		//    글자색 "blue" 로 변경
+		$("#divBox > div").css("color", "blue"); // 1번, 2번, 3번 변경됨
+		
+		// 2) 후손선택자(공백) 활용하여 id 선택자 "divBox" 인 요소의 후손 div 태그들의
+		//    글자색 "green" 로 변경
+		$("#divBox div").css("color", "green"); // span 태그를 제외한 나머지 모든 div 태그 변경됨
+		
+		$("#divFirstChild + div").css("color", "orange");
+		// => #divFirstChild 의 바로 다음 형제 div 태그 지정하는데 다음 형제가 span 이므로 지정 불가
+		$("#divFirstChild + span").css("color", "skyblue");
+
+		// #divFirstChild 의 다음 모든 형제들 중 div 태그만 지정
+		$("#divFirstChild ~ div").css("color", "red");
+		// ==================================================
+		// 셀렉트박스(id 선택자 "selectBox")인 요소의 선택된 값(value 속성값) 가져와서
+		// 텍스트박스(id 선택자 "selectResult")인 요소의 value 속성으로 설정(출력)하기
+		let selectedItem = $("#selectBox").val();
+		$("#selectResult").val(selectedItem);
+	});
+</script>
+</head>
+<body>
+	<h1>test2.html</h1>
+	<hr>
+	<h3 id="head-1">첫번째 제목</h3>
+	<h3 id="idSelector">id 선택자</h3>
+	<h3 class="classSelector">class 선택자</h3>
+	<h3 class="classSelector">class 선택자2</h3>
+	<hr>
+	<table border="1">
+		<tr><td>번호</td><td>제목</td></tr>
+		<tr><td>1</td><td>1번제목</td></tr>
+		<tr><td>2</td><td>2번제목</td></tr>
+		<tr><td>3</td><td>3번제목</td></tr>
+		<tr><td>4</td><td>4번제목</td></tr>
+	</table>
+	<hr>
+	<div id="inputBox">
+		<input type="text" value="admin" id="id">
+		<input type="password" value="1234" id="passwd"><br>
+		<textarea rows="5" cols="20" readonly="readonly"></textarea>
+		<textarea rows="5" cols="20" id="inputData"></textarea>
+	</div>
+	<hr>
+	<div id="divBox">
+		<div id="divFirstChild">
+			1번 div 태그
+			<div>1-1번 div 태그</div>
+			<div>1-2번 div 태그</div>
+		</div>
+		<span>span 태그</span>
+		<div>2번 div 태그</div>
+		<div>
+			3번 div 태그
+			<div>3-1번 div 태그</div>
+			<div>3-2번 div 태그</div>
+		</div>
+	</div>
+	<hr>
+	<select id="selectBox">
+		<option value="JAVA">JAVA</option>
+		<option value="JSP">JSP</option>
+		<option value="Spring Framework" selected="selected">Spring Framework</option>
+	</select>
+	<input type="text" id="selectResult">
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

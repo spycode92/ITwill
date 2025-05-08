@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<h1>test3.html</h1>
+	<div id="wrap">
+		<h3 id="h3_1">제목1</h3>
+		<h3 id="h3_2">제목2-1&nbsp;<span>제목2-2</span>&nbsp;<span>제목2-3</span></h3>
+		<h3 id="h3_3">제목3</h3>
+	</div>
+	<div id="resultArea"></div>
+	<textarea rows="5" cols="50" id="ta"></textarea>
+	
+	<script type="text/javascript">
+		/*
+		특정 요소에 대한 조작 이벤트
+		1. html()
+		   - HTML 문서 내에서 지정된 범위(선택자) 안의 모든 요소를 가져오거나 표시하는 메서드
+		   - 요소를 가져올 때 주석까지 포함해서 모든 요소를 가져오거나 표시(태그 포함)
+		   - 단, XML 문서를 대상으로는 사용 불가
+		   - 자바스크립트의 innerHTML 속성과 거의 동일(document.xxx.innerHTML)
+		2. text()
+		   - html() 메서드와 달리 HTML 문서 및 XML 문서 모두 사용 가능
+		   - 대상 요소 내의 모든 문자열을 가져오거나 표시 가능(태그 제외)
+		   - 단, 브라우저마다 줄바꿈이나 공백 등이 달라질 수 있음
+		   - 자바스크립트의 innerText 속성과 거의 동일(document.xxx.innerText)
+		3. empty() 
+		   - 지정된 선택자 내의 하위 요소 제거(비움)
+		4. remove()
+		   - 지정된 선택자와 선택자 내의 하위 요소 모두 제거
+		*/
+		$(function() {
+			console.log($("#wrap")); // jQuery {0: div#wrap, length: 1} 형태의 jQuery 객체 출력됨
+			
+			// div 태그(id 선택자 wrap) 내의 모든 HTML 요소 가져와서 콘솔에 출력 - html() 메서드 활용
+			console.log($("#wrap").html());
+			
+			// h3 태그 내의 HTML 요소 콘솔에 출력
+			console.log($("h3").html()); // 제목1 출력됨
+			// => 대상이 복수개일 경우 첫번째 요소에 접근
+			
+			// id 선택자 "h3_2" 인 태그 내의 HTML 요소 출력
+			console.log($("#h3_2").html()); // 제목2-1&nbsp;<span>제목2-2</span>&nbsp;<span>제목2-3</span>
+			
+			// id 선택자 "h3_2" 인 태그 내의 텍스트 요소 출력
+			console.log($("#h3_2").text()); // 제목2-1 제목2-2 제목2-3
+			// -----------------------------------------------------------
+			// id 선택자 "h3_1" 인 요소의 내용 변경하기
+			// 1) html() 메서드로 변경 - HTML 태그 적용 가능
+			$("#h3_1").html("<i>변경된 내용</i>");
+			
+			// 2) text() 메서드로 변경 - HTML 태그 적용 불가. 텍스트 형태로 그대로 출력됨
+			$("#h3_1").text("<i>변경된 내용</i>");
+			// ==========================================================================
+			// 대상 요소 제거 : empty(), remove() 메서드 활용
+			// 1. empty() : 지정된 선택자 요소 내의 하위 요소(= 내부 요소)들만 제거(비움)
+			// id 선택자 "h3_2" 요소 내의 모든 요소 제거
+// 			$("#h3_2").empty();
+			
+			// 2. remove() : 지정된 선택자 요소와 선택자 내의 하위 요소 모두 제거
+			$("#h3_2").remove();
+			
+			
+			// div 태그(id 선택자 "resultArea") 영역에 id 선택자 "wrap" 의 모든 요소 출력
+			// => HTML 태그까지 모두 포함하여 출력(태그가 적용되지 않고 텍스트로 출력되도록 하기)
+			$("#resultArea").text($("#wrap").html());
+			
+			// textarea 에 데이터 출력 시 text() 메서드 또는 val() 메서드 모두 사용 가능
+// 			$("#ta").text(`text() : ${$("#wrap").html()}`);
+			$("#ta").val(`val() : ${$("#wrap").html()}`);
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
