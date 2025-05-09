@@ -99,6 +99,193 @@
 			// 네번째 체크박스에 checked 속성값을 true 로 변경 - prop()
 			$(":checkbox").eq(3).prop("checked", true);
 			
+		}); // 확인 버튼 이벤트 끝
+		
+		// ========================================================================
+		// "#btnSet", "#btnReset" 버튼 클릭 이벤트 핸들링
+		$("#btnSet").click(function() {
+			// 텍스트박스(#idX) 요소 읽기전용 속성(readonly) 부여
+			// 1) attr() 메서드로 속성 부여(= 주로 속성값 추가 용도로 사용) => #id1 제어
+			$("#id1").attr("readonly", "readonly");
+			// => 해당 태그 자체에 readonly="readonly" 속성이 추가되고(개발자도구 - Elements 탭 확인)
+			//    해당 요소가 읽기 전용 상태로 변경됨
+			console.log("attr : " + $("#id1").attr("readonly"));
+			
+			// 2) prop() 메서드로 속성 상태 변경 => #id2 제어
+			$("#id2").prop("readonly", true); // readonly 속성을 true 로 변경
+			// => 해당 태그 자체에 readonly 속성이 추가되고(개발자도구 - Elements 탭 확인)
+			//    해당 요소가 읽기 전용 상태로 변경됨
+			console.log("prop : " + $("#id2").prop("readonly"));
+		}); // #btnSet 이벤트 핸들링 끝
+		
+		$("#btnReset").on("click", function() {
+			// 텍스트박스("#idX") 요소의 읽기전용 속성 해제
+// 			$("#id1").attr("readonly", "");
+			// => 주의! attr() 메서드는 속성 값을 설정하거나 가져오는 용도로 사용하며,
+			//    설정되어 있는 속성을 해제할 수는 없다!
+			//    (설정 결과 확인 시 그대로 readonly="readonly" 가 남아있음)
+			// => 속성 해제를 위해서는 removeAttr() 메서드 활용
+			$("#id1").removeAttr("readonly"); // 해제할 속성명 전달
+			console.log("attr : " + $("#id1").attr("readonly"));
+			
+			// 2) prop() 메서드로 속성 상태 변경 => #id2 제어
+			$("#id2").prop("readonly", false);
+			console.log("prop : " + $("#id2").prop("readonly"));
+		});
+		
+		// >>>>>>>>>>>>>>>>>>> 결론 <<<<<<<<<<<<<<<<<<<<<<<
+		// attr() 과 prop() 메서드는 비슷한 동작을 수행하지만
+		// 대상 요소의 "상태"를 "직접적으로 변경(조작)" 할 때는 prop() 메서드를 사용하고
+		// 대상 요소에 특정 속성을 추가하거나 확인, 변경 시에는 attr() 메서드를 사용하자!
+		// ==============================================================================
+		// 셀렉트박스(id="selectBox")의 선택 상태 변경에 대한 이벤트(change) 핸들링
+		$("#selectBox").change(function() {
+// 			alert("확인");
+			// 셀렉트박스에서 선택된 항목값(value 속성) 콘솔에 출력
+			console.log("셀렉트박스 선택값 : " + $("#selectBox").val());
+			// 이벤트가 발생한 대상 요소에 접근 시 이벤트 핸들러(익명함수) 내에서 this 사용 가능
+			// 1) 기존 자바스크립트 문법 형태로 this.value 등을 사용
+			console.log("셀렉트박스 선택값(this) : " + this.value);
+			// 2) jQuery 에서 this 객체 활용
+			console.log("셀렉트박스 선택값(this) : " + $(this).val());
+			
+			// this 사용법 비교
+			console.log(this); // HTML 요소 자체가 객체로 관리됨(콘솔에 HTML 태그 자체 출력됨)
+			console.log($(this)); // HTML 요소가 jQuery 객체로 관리됨(콘솔에 jQuery 객체 출력됨)
+			console.log($(this)[0]); // jQuery 객체 내에서 해당 요소를 꺼낼 경우 this 와 동일해짐
+		});
+		
+		// #btnOk 버튼 클릭 이벤트 핸들링
+		$("#btnOk").click(function() {
+			// 셀렉트박스 선택 항목을 변수에 저장하기
+			let subject = $("#selectBox").val();
+			
+			// 선택완료 버튼 클릭 시점에 "선택하세요" 항목이 선택되어 있을 경우
+			// 경고창("과목을 선택하세요!") 출력하고 셀렉트박스에 포커스 요청
+			// 아니면, 선택된 항목값을 콘솔에 출력하기
+// 			if(subject === "") { // 타입까지 동일하면 같은 값으로 간주
+				// subject.length === 0 형태로 비교해도 동일함
+				// !subject 형태로 비교해도 동일함
+// 				alert("과목을 선택하세요!");
+// 				$("#selectBox").focus();
+// 			} else {
+// 				console.log("선택된 과목 : " + subject);
+// 			}
+			// --------------------------------------------
+			// 셀렉트박스 태그의 자식 요소들 중 첫번째 option 태그 항목을 지정하여
+			// 해당 요소의 "selected" 속성 "상태"가 true 이면 해당 항목이 선택된 것으로 간주
+// 			if($("#selectBox > option").eq(0).prop("selected")) {}
+// 			if($("#selectBox")[0].selectedIndex === 0) {}
+			if($("#selectBox > option:first").prop("selected")) { // 가상선택자 :first 는 eq(0) 과 동일
+				alert("과목을 선택하세요333!");
+				$("#selectBox").focus();
+			} else {
+				console.log("선택된 과목333 : " + subject);
+			}
+		});
+		// ===================================================================
+		// 클래스 제어 메서드
+		// 1) 클래스 추가 : addClass("클래스명")
+		// 2) 클래스 제거 : removeClass("클래스명")
+		// 3) 클래스 토글 : toggleClass("클래스명")
+		//    => 토글이란? 현재 상태를 반전시키는 기능이며
+		//		 클래스를 토글하면 기존 클래스가 있을 때 제거, 없으면 추가함
+		// 4) 클래스 확인 : hasClass("클래스명") => true/false 리턴
+		// #btnAddClass, #btnRemoveClass, #btnToggleClass 클릭 이벤트 핸들링
+		$("#btnAddClass").click(function() {
+			// 셀렉트박스("#selectBox")에 "active" 라는 클래스가 존재하는지 확인
+			console.log("셀렉트박스 active 클래스 확인 : " + $("#selectBox").hasClass("active"));
+			
+			// 셀렉트박스("#selectBox")에 "active" 라는 클래스 추가
+			$("#selectBox").addClass("active");
+			
+			// 셀렉트박스("#selectBox")에 "active2" 라는 클래스 추가
+			$("#selectBox").addClass("active2");
+			
+			// 셀렉트박스("#selectBox")에 "active3 active4" 라는 클래스 추가(복수개 클래스 공백으로 구분)
+			$("#selectBox").addClass("active3 active4");
+			
+			console.log("셀렉트박스 active 클래스 확인 : " + $("#selectBox").hasClass("active"));
+		});
+		
+		$("#btnRemoveClass").click(function() {
+			// 셀렉트박스("#selectBox")에 "active" 라는 클래스 제거
+			$("#selectBox").removeClass("active");
+			console.log("셀렉트박스 active 클래스 확인 : " + $("#selectBox").hasClass("active"));
+		});
+		
+		$("#btnToggleClass").click(function() {
+			// 셀렉트박스("#selectBox")에 "active" 라는 클래스 토글
+			$("#selectBox").toggleClass("active");
+			console.log("셀렉트박스 active 클래스 확인 : " + $("#selectBox").hasClass("active"));
+		});
+		// ======================================================================
+		// 전체선택(= 첫번째 체크박스 = "#allCheck") 체크박스 체크 상태에 따라
+		// 각 항목의 체크박스 상태 변경하기
+		$("#allCheck").click(function() {
+			// 체크박스 선택 시 테이블 내의 범위로 한정하려면
+			// table 태그의 후손 선택자로 체크박스를 선택하면 된다!
+// 			if($("table :checkbox").prop("checked")) {
+// 				for(let i = 0; i < $(":checkbox").length; i++) {
+// 					$(":checkbox").eq(i).prop("checked", true);
+// 				}		
+// 			} else {
+// 				for(let i = 0; i < $(":checkbox").length; i++) {
+// 					$(":checkbox").eq(i).prop("checked", false);
+// 				}
+// 			}
+			// ----------------
+			// 일반적인 for문이 아닌 jQuery 에서 제공하는 반복문 활용
+			// $(선택자 또는 객체).each(함수);  =>  대상을 반복하면서 지정된 함수 실행
+			let allCheckStatus = $("#allCheck").prop("checked");
+			// table 태그의 후손들 중에서 체크박스 인덱스가 0번보다 큰 체크박스들만 반복
+			$("table :checkbox:gt(0)").each(function() {
+				console.log($(this)); // 각 체크박스에 접근 가능
+				$(this).prop("checked", allCheckStatus); // 체크박스 상태 변경
+			});
+			
+			// ----------------
+			// $("table :checkbox") 에는 테이블 내의 체크박스 복수개가 객체 1개로 관리되므로
+			// 해당 객체의 모든 checked 속성 "상태"를 전체선택 체크박스 체크상태로 동일하게 설정
+// 			console.log($("table :checkbox"));
+// 			$("table :checkbox:gt(0)").prop("checked", $("#allCheck").prop("checked"));
+		});
+		// =============================================================
+		// #btn2 클릭 이벤트 핸들링
+		$("#btn2").click(function() {
+			// 테이블 내의 체크박스가 체크된 항목에 대한 이름을 차례대로 출력
+			$("table :checkbox:gt(0)").each(function() {
+				if($(this).prop("checked")) {
+// 					// parent() 메서드를 활용하면 현재 요소의 부모 객체 탐색 가능
+// 					console.log($(this).parent().parent().children().eq(2).text());
+// 					// => 체크박스의 부모(td)의 부모(tr)의 자식들(td 들) 중 
+// 					//    3번째(2번 인덱스)에 해당하는 요소의 텍스트에 접근
+					// ----------------
+					// id="name1" 등 지정했을 경우
+// 					let num = $(this).val(); // 현재 체크박스의 value 값 가져오기
+// 					let name = $("#name" + num).text();
+					
+					// 클래스 또는 아이디 지정 없을 경우
+					// tr 태그 중 체크박스 value 값과 같은 번호의 tr 태그 내에서 세번째 td 태그 접근
+// 					let name = $(`table tr:eq(${num}) td:eq(2)`).text() + "4444";
+					
+// 					console.log("이름 : " + name);
+				}	
+			});
+			// ---------------------------
+// 			$("table :checkbox:checked").each(function() {
+// 				console.log($(this).parent().next().next().text() + "222");
+// 				// => 체크박스의 부모(td) 내의 요소의 다음 요소 * 2 를 통해 세번째 td 에 접근 
+// 			});
+			
+			// -------------------------------------------------------
+			$("table :checkbox:checked").each(function() {
+				console.log($(this).closest("tr").find("td:eq(2)").text() + "222");
+				// => closest() 메서드를 통해 가장 가까운 특정 태그 탐색 가능
+				//    find() 메서드를 통해 내부 요소들 중 원하는 대상 탐색
+				// => 가장 가까운 "tr" 태그 내에서 세번째 td 태그의 텍스트에 접근
+			});
+			
 		});
 		
 	});
@@ -117,23 +304,26 @@
 			<th width="100">이름</th>
 		</tr>
 		<tr>
-			<td><input type="checkbox" id="check1" name="check" value="1" checked></td>
+			<td>
+				<input type="checkbox" id="check1" name="check" value="1" checked>
+			</td>
 			<td>1</td>
-			<td>홍길동</td>
+			<td id="name1">홍길동</td>
 		</tr>
 		<tr>
 			<td><input type="checkbox" id="check2" name="check" value="2"></td>
 			<td>2</td>
-			<td>이순신</td>
+			<td id="name2">이순신</td>
 		</tr>
 		<tr>
 			<td><input type="checkbox" id="check3" name="check" value="3"></td>
 			<td>3</td>
-			<td>강감찬</td>
+			<td id="name3">강감찬</td>
 		</tr>
 		<tr>
 			<td colspan="3">
 				<input type="button" value="확인" id="btn">
+				<input type="button" value="확인2" id="btn2">
 				<div id="result"></div>
 			</td>
 		</tr>
@@ -141,7 +331,7 @@
 	<hr>
 	<input type="text" id="id1" placeholder="attr()">
 	<input type="text" id="id2" placeholder="prop()"><br>
-	<input type="button" value="readonly 속성 설정" id="btnOk">
+	<input type="button" value="readonly 속성 설정" id="btnSet">
 	<input type="button" value="readonly 속성 해제" id="btnReset">
 	<hr>
 	<select id="selectBox">
@@ -150,7 +340,11 @@
 		<option value="JSP">JSP</option>
 		<option value="Spring Framework">Spring Framework</option>
 	</select>
-	<input type="button" value="선택완료" id="btnOk2">
+	<input type="button" value="선택완료" id="btnOk"><br>
+	<input type="button" value="클래스추가" id="btnAddClass">
+	<input type="button" value="클래스제거" id="btnRemoveClass">
+	<input type="button" value="클래스토글" id="btnToggleClass">
+	<input type="checkbox">
 </body>
 </html>
 
