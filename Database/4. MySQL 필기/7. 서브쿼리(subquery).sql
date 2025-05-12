@@ -4,7 +4,8 @@ use hr;
 -- 서브쿼리란?
 -- 쿼리구문 안에 또 다시 쿼리구문이 포함된 형태
 -- select구문에서 group by절을 제외한 모든 절에 서브쿼리 사용 가능함.
--- 서브쿼리 유형 : 단일행 서브쿼리, 다중행 서브쿼리
+-- 서브쿼리 유형 : 단일행 서브쿼리, 다중행 서브쿼리,
+--             단일컬럼 서브쿼리, 다중컬럼 서브쿼리
 -- [문법] select 컬럼1, 컬럼2, 컬럼3
 --       from 테이블명
 --       where 컬럼명 =  (select 컬럼
@@ -60,8 +61,6 @@ GROUP BY department_id
 HAVING MIN(salary) > (SELECT MIN(salary) 
 					  FROM employees
                       WHERE department_id = 30);
-
-
 
 -- 오류 원인은? 
 -- 단일행 비교연산자가 작성되어 있는데 서브쿼리로부터 여러 행이 반환됨.
@@ -130,4 +129,92 @@ WHERE salary <ALL (SELECT salary
 				   WHERE job_id = 'IT_PROG')
 AND job_id <> 'IT_PROG';
 
+-- (3) 단일컬럼 서브쿼리
+-- 서브쿼리로부터 하나의 컬럼을 기준으로 값이 반환되는 유형
+-- 메인쿼리 좌변에도 단일 컬럼을 작성하면 됨.(비쌍 비교)
 
+-- 단일컬럼 서브쿼리 + 다중행 서브쿼리 예제
+-- employees 테이블에서 last_name이 king인 사원과
+-- 동일한 부서에 소속된 사원들을 출력하시오.
+select employee_id, last_name, salary, department_id
+from employees
+where department_id in (select department_id
+                        from employees
+                        where last_name = 'king');
+
+-- (4) 다중컬럼 서브쿼리
+-- 서브쿼리로부터 여러 컬럼을 기준으로 값이 반환되는 유형
+-- 메인쿼리 좌변과 서브쿼리 select절의 컬럼리스트가 맞아야 함.(쌍비교)
+
+-- 다중컬럼 서브쿼리 + 다중행 서브쿼리 예제
+-- 부서에서 최소급여를 받는 사원의 정보를 출력하시오.
+SELECT employee_id, first_name, department_id, salary
+FROM employees
+WHERE (department_id, salary) IN (SELECT department_id, min(salary) 
+                                  FROM employees
+                                  GROUP BY department_id)
+ORDER BY department_id;
+
+-- 결과가 나오지 않는 원인? 
+-- 다중행 서브쿼리로부터 반환되는 값리스트에 null값이 포함되어 있는데
+-- 메인쿼리에 and의 성격을 가지는 비교연산자를 사용하면 메인쿼리 결과도 null이다!
+
+-- employees 테이블에서 자기 자신이 매니저가 아닌 
+-- 즉, 최하위 직원의 정보를 출력하시오.
+select employee_id, last_name
+from employees
+where employee_id not in (select manager_id
+                          from employees
+                          where manager_id is not null);
+
+-- <연습문제>
+-- 1. 
+SELECT last_name, hire_date
+FROM employees
+WHERE department_id = (SELECT department_id
+					   FROM employees
+					   WHERE last_name = 'Abel')
+AND last_name <> 'Abel';
+
+-- 2.
+SELECT employee_id, last_name, salary
+FROM employees
+WHERE salary >= (SELECT AVG(salary)
+ 	             FROM employees)
+ORDER BY salary;
+
+-- 3.
+SELECT employee_id, last_name
+FROM employees
+WHERE department_id IN (SELECT department_id
+						FROM employees
+						WHERE last_name like '%u%');
+
+-- 4. 
+SELECT employee_id, last_name, department_id, job_id
+FROM employees
+WHERE department_id IN (SELECT department_id
+                        FROM departments
+                        WHERE location_id = 1700);
+
+-- 5. 
+SELECT employee_id, last_name, salary
+FROM employees
+WHERE department_id IN (SELECT department_id
+                        FROM employees
+                        WHERE last_name like '%u%')
+AND salary >= (SELECT AVG(salary)
+               FROM employees);
+
+-- 6. 
+SELECT employee_id, last_name
+FROM employees
+WHERE employee_id IN (SELECT manager_id
+                      FROM employees);
+
+-- 7. 
+SELECT department_id, department_name
+FROM departments
+WHERE department_id NOT IN (select department_id
+                            from employees
+                            where department_id is not null);
