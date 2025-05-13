@@ -173,9 +173,200 @@ where department_id = (select department_id
                        from departments
                        where location_id = 1800);
 
+-- (4) 트랜잭션 제어 명령어(TCL)
+-- 트랜잭션이란? 하나의 논리적인 작업 단위
+--            하나이상의 DML이 모여서 하나의 트랜잭션이 구성됨.(insert, update, delete)
+--            하나의 DDL이 하나의 트랜잭션이 되기도 함.(create, alter, drop, truncate)
+--            하나의 DCL이 하나의 트랜잭션이 되기도 함.(grant, revoke)
+-- 트랜잭션 제어 명령어 : commit - 트랜잭션 종료 명령어로 변경작업을 DB에 영구히 저장함.
+--                   rollback - 트랜잭션 종료 명령어로 변경작업을 취소함.
+--                   savepoint - 트랜잭션 진행 중 되돌아갈 지점을 생성하는 명령어
+-- 트랜잭션 운영 방법
+-- 1) autocommit 활성화 - 장점 : 자동 저장되므로 편함.
+--                    - 단점 : 작업 실수 시 취소가 안됨.
+-- 2) autocommit 비활성화 - 장점 : 작업 후 미리보기를 하고 저장, 취소를 결정함.
+--                      - 단점 : 작업 후 수동으로 저장, 취소를 수행해야함.
 
+-- 트랜잭션 운영 예제
+-- 트랜잭션 시작 -> update ---;
+--               select ---; (미리보기, 임시데이터 상태)
+--               insert ---;
+--               update ---;
+-- 트랜잭션 종료 -> commit; (저장)
+-- 트랜잭션 시작 -> delete ---;
+--               delete ---;
+-- 트랜잭션 종료 -> rollback; (취소)
+-- 트랜잭션 시작/종료 -> create table ---; (DDL)
+--                  (autocommit 내포됨)
+-- 트랜잭션 시작/종료 -> grant ---; (DCL)
+--                  (autocommit 내포됨)
+-- 트랜잭션 시작 -> insert ---;
+--               update ---;
+--               update ---;
+-- 트랜잭션 종료 -> create table ---; (DDL)
+--              (autocommit 내포됨)   
 
+-- autocommit 기능 해제하기
+-- [Query] - [Autocommit Transactions] 체크 해제
 
+-- [commit 예제] 
+-- 트랜잭션 시작
+update copy_emp
+set salary = salary + 1000
+where department_id = 30;
 
+select employee_id, last_name, salary, department_id
+from copy_emp
+where department_id = 30;  -- 미리보기, 임시 data 상태
 
+commit;
+-- 트랜잭션 종료
 
+-- [rollback 예제]
+-- 트랜잭션 시작
+delete from copy_emp;
+
+select *
+from copy_emp;  -- 미리보기, 임시 data 상태
+
+rollback;
+-- 트랜잭션 종료
+
+-- 작업 취소 확인
+select *
+from copy_emp;
+
+-- [savepoint 예제]
+-- 트랜잭션 진행 중 되돌아갈 지점(포인트, 기점)을 생성하는 명령어
+-- 트랜잭션 진행 중 savepoint를 잘 활용하면 부분 취소가 가능함.
+-- savepoint는 트랜잭션 진행 중 사용하는 명령어로 트랜잭션 시작, 종료와는 상관 없음.
+-- 트랜잭션 종료(commit, rollback) 시 자동으로 지워짐.
+-- 트랜잭션 시작 -> update ---;
+--              savepoint test1;
+--              update ---; [실수]
+--              savepoint test2;
+--              delete ---; 
+--              rollback to test1;
+--              update ---;
+--              update ---;
+-- 트랜잭션 종료 -> commit;
+
+-- 트랜잭션 시작
+update copy_emp
+set salary = salary * 1.2
+where employee_id = 101;
+
+select employee_id, last_name, salary
+from copy_emp
+where employee_id = 101;  -- 미리보기
+
+savepoint up101;
+
+update copy_emp
+set salary = salary * 1.5
+where employee_id = 102;
+
+select employee_id, last_name, salary
+from copy_emp
+where employee_id in (101, 102);  -- 미리보기
+
+rollback to up101;
+
+select employee_id, last_name, salary
+from copy_emp
+where employee_id in (101, 102);  -- 미리보기
+
+commit;
+-- 트랜잭션 종료
+
+-- <연습문제> : autocommit 해제 후 작업하기
+-- 1. 
+create table my_employee
+(id int primary key,
+ last_name varchar(25),
+ first_name varchar(25),
+ userid varchar(8),
+ salary int);
+ 
+-- 2.
+desc my_employee;
+
+-- 트랜잭션 시작
+-- 3. insert(4개의 행)
+INSERT INTO my_employee
+VALUES (1, 'Patel', 'Ralph', 'rpatel', 895);
+
+INSERT INTO my_employee (id, last_name, first_name, userid, salary)
+VALUES (2, 'Dancs', 'Betty', 'bdancs', 860);
+
+INSERT INTO my_employee
+VALUES (3, 'Biri', 'Ben', 'bbiri', 1100),
+       (4, 'Newman', 'Chad', 'cnewman', 750);
+
+-- 4. select(미리보기)
+SELECT *
+FROM my_employee;
+
+-- 5. 저장
+commit; 
+-- 트랜잭션 종료
+
+-- 트랜잭션 시작
+-- 6. update
+UPDATE my_employee
+SET last_name = 'Drexler'
+WHERE id = 3;
+
+-- 7. update
+UPDATE my_employee
+SET salary = 1000 
+WHERE salary < 900;
+
+-- 8. select(미리보기)
+SELECT *
+FROM my_employee;
+
+-- 9. delete
+DELETE FROM my_employee 
+WHERE last_name = 'Dancs';
+
+-- 10. select(미리보기)
+SELECT *
+FROM my_employee;
+
+-- 11. 저장
+commit;
+-- 트랜잭션 종료
+
+-- 트랜잭션 시작
+-- 12. insert
+INSERT INTO my_employee
+VALUES (5, 'Ropeburn', 'Audrey', 'aropebur', 1550);
+
+-- 13. select(미리보기)
+SELECT *
+FROM my_employee;
+
+-- 14. savepoint 생성
+SAVEPOINT step1;
+
+-- 15. delete(모든행)
+DELETE FROM my_employee;
+
+-- 16. select(미리보기)
+SELECT *
+FROM my_employee;
+
+-- 17. savepoint 지점으로 롤백
+ROLLBACK TO step1;
+
+-- 18. select(미리보기)
+SELECT *
+FROM my_employee;
+
+-- 19. 저장
+commit;
+-- 트랜잭션 종료
+
+-- autocommit 기능 활성화하기
+-- -[Query] - [Autocommit Transactions] 체크하기
