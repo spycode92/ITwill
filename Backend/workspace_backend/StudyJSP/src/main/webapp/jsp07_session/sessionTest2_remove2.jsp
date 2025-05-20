@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%
+// 세션 객체 내에서 "sessionValue2" 속성 제거
+session.removeAttribute("sessionValue2");
 
-</body>
-</html>
+// sessionTest2_get.jsp 페이지로 리다이렉트
+response.sendRedirect("sessionTest2_get.jsp");
+%>
