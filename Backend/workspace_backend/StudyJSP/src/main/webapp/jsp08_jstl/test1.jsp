@@ -15,6 +15,7 @@
 		<input type="text" name="email" placeholder="E-Mail"><br>
 		<input type="submit" value="전송">
 	</form>
+	<hr>
 	<form action="test1_result2.jsp" method="post">
 		<input type="text" name="name" placeholder="이름"><br>
 		<input type="text" name="age" placeholder="나이"><br>
