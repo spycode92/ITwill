@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="https://jakarta.ee/xml/ns/jakartaee" 
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
+	<display-name>StudyJSP</display-name>
+  	<!-- 
+	사용자가 웹브라우저를 통해 현재 서버의 프로젝트에 대한 컨텍스트 루트(/StudyJSP 경로)가 요청 시
+	톰캣 서버는 기본적으로 실행할 대상 파일을 web.xml 파일 내의 <welcome-file-list> 태그 내의
+	<welcome-file> 태그 항목들 중에서 탐색(위에서부터 차례대로 탐색)하여 일치하는 파일을 실행함
+	=> 이 때, 해당 목록 중 일치하는 파일이 존재하지 않을 경우 404 Not Found 오류 발생!
+	-->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+<!-- 		<welcome-file>main.jsp</welcome-file> -->
+	</welcome-file-list>
+	
+	<!-- ================================================== -->
+	<!-- 
+	[ 서블릿 주소(가상 주소)에 대한 매핑(Mapping) 작업 수행 ]
+	- 요청 서블릿 주소와 실행할 클래스 연결 작업
+	- <servlet> 태그와 <servlet-mapping> 태그 작성하여 매핑(두 태그간의 순서 무관)
+	-->
+	<!-- http://localhost:8080/StudyJSP/test1 서블릿 주소 요청 시 TestServlet1 클래스 실행 매핑 -->
+	<!-- 1. <servlet> 태그를 통해 서블릿 이름과 실행할 서블릿 클래스 지정 -->
+	<servlet>
+		<!-- <servlet-name> 태그를 사용하여 서블릿 이름 지정(아무거나 상관없음) -->
+		<servlet-name>nameTest1</servlet-name>
+		<!-- <servlet-class> 태그를 사용하여 실행할 서블릿 클래스 지정(패키지명 포함) -->
+		<servlet-class>jsp09_servlet.TestServlet1</servlet-class>
+	</servlet>
+	
+	<!-- 2. <servlet-mapping> 태그를 통해 요청 URL 과 해당 URL 에 대한 서블릿 이름 지정 -->
+	<servlet-mapping>
+		<!-- <servlet-name> 태그를 사용하여 서블릿 이름 지정(아무거나 상관없음) -->
+		<!-- 단, <servlet> 태그에서 지정한 <servlet-name> 태그 값과 동일해야함 -->
+		<servlet-name>nameTest1</servlet-name>
+		<!-- 
+		<url-pattern> 태그를 사용하여 매핑할 요청 주소(URL) 지정
+		=> 웹브라우저에서 컨텍스트루트/매핑할서블릿주소 형식으로 요청 주소 지정
+		=> 주의! 매핑할 주소 형식은 반드시 /서블릿주소 또는 *.패턴명 형태로만 지정
+		-->
+		<url-pattern>/myServlet1</url-pattern>
+	</servlet-mapping>
+	
+	<!-- =====================================================================
+	 -->
+	
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
